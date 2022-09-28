@@ -1,24 +1,38 @@
-# README
+# BLOG PROJECT
+- A fully functional website that will show the list of posts and empower readers to interact with them by adding comments and liking posts.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
+-Download the repository as a zip file/ clone the repository using 
+git clone https://github.com/AbbyNyakara/rails_blogapp.git
 
-Things you may want to cover:
+Create a branch and start working!
 
-* Ruby version
+## Authors
 
-* System dependencies
+👤 **Abby**
 
-* Configuration
+- GitHub: [@AbbyNyakara](https://github.com/AbbyNyakara)
+- Twitter: [@AbigaelNyakara](https://twitter.com/AbbyNyakara)
+- LinkedIn: [Abigael Nyakara](https://linkedin.com/in/AbbyNyakara)
 
-* Database creation
 
-* Database initialization
+## 🤝 Contributing
 
-* How to run the test suite
+Contributions, issues, and feature requests are welcome!
 
-* Services (job queues, cache servers, search engines, etc.)
+Feel free to check the [issues page](../../issues/).
 
-* Deployment instructions
+## Show your support
 
-* ...
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Coding Partner
+- Code Reviewer
+- etc
+
+## 📝 License
+
+This project is [MIT](https://spdx.org/licenses/MIT.html) licensed.
+
