@@ -1,1 +1,10 @@
-<h1>This is the users home page</h1>
+<% @users.each do |user| %>
+  <div style="border: 2px solid #000; 
+              display: flex; 
+              justify-content: space-between; 
+              padding: 2%;
+              margin: 1%">
+    <h1><%= link_to user.name, user %></h1>
+    <p>Number of posts: <%= user.posts_counter %></p>
+  </div>
+<% end %>
