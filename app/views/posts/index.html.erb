@@ -1,1 +1,18 @@
-<h1>This are the posts home page</h1>
+<div>
+  <div>
+    <img src=<%=  @user.photo %>/>
+    <p> <%= @user.name %> </p>  
+  </div>
+
+  <% @posts.each do |post| %>
+    <div>
+      <h3><%= post.id </h3>
+      <p> <%= post.text %></p>
+      <small>Comments: <%=post.comments_counter %>, Likes: <%=post.likes_counter%> </small>
+      <% post.recent_comments.each do |comment|%>
+        <h3><%= comment.user.name %><%= comment.text %></h3>
+      <% end %>
+    </div>
+
+    <button>pagination</button>
+</div>
