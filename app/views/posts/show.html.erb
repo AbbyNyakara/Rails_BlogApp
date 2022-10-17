@@ -1,10 +1,20 @@
 <div>
-  <p>Post <%=@post.id%> by <%= @user.name%> </p>
-  <p>Comments <%=@post.comments_counter%>,Likes <%= @post.likes_counter%> </p>
-  <div>
-    <p> <%= @post.text %> </p>
-    <% @comments.each do |comment| %>
-      <%= comment.user.name %> : <%= comment.text %>
-    <% end %>
-  </div>
+    <div>
+        <div>
+            <h2>Post : <%= @post.title %> by <%= @post.user.name %></h2>
+            <h3>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter %><h3>
+        </div>
+        <p><%= @post.text %></p>
+
+         <div>
+        <%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/likes", scope: :like do |form| %>
+        <%= form.submit "Like " %>
+        <%end%>
+        </div>
+          
+            <% @comments.each do |comment|%>
+                <h3><%= comment.text %></h3>
+            <% end %>
+    </div>
+         <%= render partial: "add_comments", local: { post: @post } %>
 </div>
