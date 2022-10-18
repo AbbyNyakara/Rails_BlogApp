@@ -1,17 +1,12 @@
 class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id].to_i)
-    @post = @user.posts
+    @post = @user.posts.includes(:comments)
   end
 
   def new
     Post.new
   end
-
-  # def show
-  #   @post = Post.joins(:user).where(user: { id: params[:user_id] }).find(params[:id])
-  #   @comments = @post.comments
-  # end
 
   def show
     @post = Post.find(params[:id])
@@ -24,16 +19,16 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html do
         if @post_new.save
-          redirect_to "/users/#{@post_new.user_id}/posts/", message: 'Success'
+          redirect_to "/users/#{@post_new.user_id}/posts/"
         else
-          render :new, alert: 'Error occured please check!'
+          render :new
         end
       end
     end
   end
 
   def post_params
-    params.require(:post).permit(:Title, :Text)
+    params.require(:post).permit(:title, :text)
   end
 
   private :post_params
