@@ -11,6 +11,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
+gem 'cancancan'
 gem 'devise'
 gem 'jquery-rails'
 gem 'letter_opener'
