@@ -3,19 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-  has_many :posts
-  has_many :likes
-  has_many :comments
-  before_validation :default_values
-
+  has_many :posts, foreign_key: :user_id
+  has_many :comments, foreign_key: :user_id
+  has_many :likes, foreign_key: :user_id
   validates :name, presence: true
-  validates :posts_counter, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  def default_values
-    self.posts_counter = 0
-    self.Photo = 'https://www.istockphoto.com/photo/portrait-of-smiling-mixed-race-woman-looking-at-camera-gm1319763830-406531071'
-  end
+  validates :postscounter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  def recent_posts
-    Post.limit(3).order(created_at: :desc)
+  def last_three_post
+    posts.includes(:user).order(created_at: :DESC).limit(3)
   end
 end

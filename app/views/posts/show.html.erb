@@ -1,20 +1,28 @@
-<div>
-    <div>
-        <div>
-            <h2>Post : <%= @post.title %> by <%= @post.user.name %></h2>
-            <h3>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter %><h3>
-        </div>
-        <p><%= @post.text %></p>
 
-         <div>
-        <%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/likes", scope: :like do |form| %>
-        <%= form.submit "Like " %>
-        <%end%>
-        </div>
-          
-            <% @comments.each do |comment|%>
-                <h3><%= comment.text %></h3>
-            <% end %>
-    </div>
-         <%= render partial: "add_comments", local: { post: @post } %>
+<div class="each-post">
+<div class="each-post-details">
+<p>Post <%=   @post.id %> by  <%=   @post.user.name %>  </p>
+<div>
+<p>Comments:<%=   @post.commentscounter %></p>
+<p>Likes:<%=   @post.likescounter %></p>
 </div>
+</div>
+<p><%=   @post.text %> </p>
+<p><%=   @post.title %> </p>
+<%= render partial: 'likes/form' %>
+
+
+
+</div>
+<div class="comments-for-each-post">
+
+<% @post.comments.each do |f| %>
+ 
+    <p> <%= f.user.name %> : <%= f.text %> </p>
+  
+
+<% end %>
+</div>
+<button>
+<%= link_to "Add a comment", new_user_post_comment_path(@post.user, @post) %>
+</button>

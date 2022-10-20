@@ -1,11 +1,16 @@
-<h1>Blog Application</h1>
-<% @users.each do |user| %>
-  <div style="border: 2px solid #000; 
-              display: flex; 
-              justify-content: space-between; 
-              padding: 2%;
-              margin: 1%">
-    <h1><%= link_to user.name, user %></h1>
-    <p>Number of posts: <%= user.posts_counter %></p>
-  </div>
+<div class="each-user-div">
+<% @users.each do |f| %>
+  <img src="<%= f.photo %> " alt = "<%= f.name %>"  />
+
+     <div>
+        <p>   UserName: <%= f.name %></p>
+         <p>  Number of Posts: <%= f.postscounter %></p>
+         <button>
+         <%= link_to("See Profile", user_path(f)) %>
+         </button>
+         <%= link_to "Change Password", edit_user_registration_path %>
+         
+    </div>
 <% end %>
+</div>
+
