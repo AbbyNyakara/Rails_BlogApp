@@ -1,20 +1,17 @@
-<div>
+<div class="post">
+  <div class="post_header">
+    <h4><%= @post.title %> by <%= @post.author.name %></h4>
     <div>
-        <div>
-            <h2>Post : <%= @post.title %> by <%= @post.user.name %></h2>
-            <h3>Comments: <%= @post.comments_counter%>, Likes: <%= @post.likes_counter %><h3>
-        </div>
-        <p><%= @post.text %></p>
-
-         <div>
-        <%= form_with url: "/users/#{@post.user_id}/posts/#{@post.id}/likes", scope: :like do |form| %>
-        <%= form.submit "Like " %>
-        <%end%>
-        </div>
-          
-            <% @comments.each do |comment|%>
-                <h3><%= comment.text %></h3>
-            <% end %>
+      <p>Comments: <span><%= @post.comments.count %></span></p>
+      <p>Likes: <span><%= @post.likes.count %></span></p>
     </div>
-         <%= render partial: "add_comments", local: { post: @post } %>
+  </div>
+  <p><%= @post.text %></p>
+  <%= render partial: "shared/comment/new_comment"%>
 </div>
+<div class="comments">
+  <% @post.comments.each do |comment| %>
+    <p><%= comment.author.name %> : <%= comment.text %></p>
+  <% end %>
+</div>
+<%= button_to 'Like', user_post_likes_path(@post.author, @post), method: :post, class: 'all_posts'%>
