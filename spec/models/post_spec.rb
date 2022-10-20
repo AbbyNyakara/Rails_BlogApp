@@ -1,43 +1,44 @@
 require 'rails_helper'
+
 RSpec.describe Post, type: :model do
-  post1 = Post.new
-  it 'is not valid without a title' do
-    post = Post.new(title: nil)
-    expect(post).to_not be_valid
+  subject do
+    user = User.create(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.',
+                       posts_counter: 0)
+    Post.create(title: 'Hello', text: 'This is my first post', comments_counter: 0, likes_counter: 0, author: user)
+    Post.create(title: 'Hello2', text: 'This is my second post', comments_counter: 0, likes_counter: 0, author: user)
+    Post.new(title: 'Hello3', text: 'This is my third post', comments_counter: 0, likes_counter: 0, author: user)
   end
-  it 'is not valid if title has more than 250 characters' do
-    post = Post.new(title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-        atis Voluptatem quaerat non architecto ab laudantium
-        modi minima sunt esse temporibus sint culpa, recusandae aliquam numquams
-        totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam
-        quasi aliquam eligendi, placeat qui corporis!")
-    expect(post).to_not be_valid
+
+  before { subject.save }
+
+  it 'title should be present' do
+    subject.title = nil
+    expect(subject).to_not be_valid
   end
-  it 'is not valid if posts counter is not a number ' do
-    post = Post.new(title: 'New post', postscounter: 'not a number')
-    expect(post).to_not be_valid
+
+  it 'comment counter should be greater or equal to 0' do
+    subject.comments_counter = -1
+    expect(subject).to_not be_valid
   end
-  it 'is not valid if likes counter is not a number ' do
-    post = Post.new(title: 'New post', likescounter: 'not a number')
-    expect(post).to_not be_valid
+
+  it 'likes counter should be greater or equal to 0' do
+    subject.likes_counter = -1
+    expect(subject).to_not be_valid
   end
-  it 'is not valid if posts counter is less than 0 ' do
-    post = Post.new(title: 'New post', postscounter: -1)
-    expect(post).to_not be_valid
+
+  it 'should update posts counter' do
+    expect(subject.author.posts_counter).to eq 3
   end
-  it 'is not valid if likes counter is less than 0 ' do
-    post = Post.new(title: 'New post', likescounter: -1)
-    expect(post).to_not be_valid
-  end
-  it 'Post like counter to increment' do
-    post1.user = User.new(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.')
-    post1.send(:posts_counter)
-    expect(post1.user.postscounter).to be(1)
+
+  it 'should get last 5 comment' do
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!')
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!2')
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!3')
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!4')
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!5')
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!6')
+    Comment.create(post: subject, author: subject.author, text: 'Hi John!7')
+    expect(subject.last_five_comments.length).to eq 5
+    expect(subject.last_five_comments[0].text).to eq 'Hi John!7'
   end
 end

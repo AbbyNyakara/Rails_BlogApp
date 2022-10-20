@@ -1,19 +1,16 @@
-Add a new post
-<%= form_with model: @post, url: user_posts_path, method: :post do |f| %>
-    <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+<h3>Create new Post</h3>
 
-    
-</div>
-<div>
- <%= f.label :text %>
- <%= f.text_field :text %>
+<%= form_with model: @post, url: user_posts_path, method: :post do |form| %>
+  <div class="mb-3">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Title' %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :text %>
+    <%= form.text_area :text, class: 'form-control', placeholder: 'Content' %>
+  </div>
 
-</div>
-
-<div>
-<%= f.submit "Add a post " %>
-</div>
-  
-  <% end %>
+  <div class="mb-3">
+    <%= form.submit 'Create post', class: 'btn btn-primary' %>
+  </div>
+<% end %>

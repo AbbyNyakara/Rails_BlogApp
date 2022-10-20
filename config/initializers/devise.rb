@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '276b26012f4af8813d9f84a7fe54b0ee9bd63539f746a7eab3632f783e1a0a65ac8fc2bf0b473a82613c2e1ed22c6c6e94dd28f2b67e249d0b497bb62fb98938'
+  # config.secret_key = '5c8af9f023f4ea572529fd46e2208b500b872fdb75ca8872c8ba7665ba784521e1c9480734cb54bf377a651182702e899abea40a0cb64521701be8b950db95b4'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '5684a7eea37e66ae8fbb3daee61ac26d0b32357d4644df7f931ed037ce2bc757a37f4cd32be49363b25d7a929a39735bd28325d845b746458ad7608a12c433d0'
+  # config.pepper = 'cccfb993565272e790892da4dc153d8e9767d347a5d310c024710fa2c8a8f90af643a82505e8555997f7dcffdbc2eca27edeb235840880bbafcd519fa4df6587'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -228,7 +228,7 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # config.sign_in_after_reset_password = true
+  # config._after_reset_password = true
 
   # ==> Configuration for :encryptable
   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
@@ -307,5 +307,5 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
-  # config.sign_in_after_change_password = true
+  # config._after_change_password = true
 end

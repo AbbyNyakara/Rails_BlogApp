@@ -1,16 +1,15 @@
-<div class="each-user-div">
-<% @users.each do |f| %>
-  <img src="<%= f.photo %> " alt = "<%= f.name %>"  />
+<% if user_signed_in? %>
+<%= button_to 'Log out', destroy_user_session_path, method: :delete %>
+<% if @users.count > 0 %>
 
-     <div>
-        <p>   UserName: <%= f.name %></p>
-         <p>  Number of Posts: <%= f.postscounter %></p>
-         <button>
-         <%= link_to("See Profile", user_path(f)) %>
-         </button>
-         <%= link_to "Change Password", edit_user_registration_path %>
-         
-    </div>
+  <% @users.each do |user| %>
+    <%= render partial: "shared/user/user_header", locals: { user: user } %>
+  <% end %>
+<% else %>
+  <p>No users found</p>
 <% end %>
-</div>
+<% else %>
+<a href="/users/sign_in">Sign in/ Sign up</a>
+  <p>Please sign in</p>
 
+<% end %>

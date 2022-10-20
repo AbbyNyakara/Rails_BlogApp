@@ -9,14 +9,21 @@ gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
-gem 'rails-controller-testing'
-# Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
 
+# Use the Puma web server [https://github.com/puma/puma]
+gem 'devise'
+gem 'jquery-rails'
+gem 'letter_opener'
+gem 'puma', '~> 5.0'
+gem 'sassc-rails'
+gem 'sass-rails'
+
+gem 'ffi', github: 'ffi/ffi', submodules: true
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
 gem 'turbo-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
@@ -25,8 +32,7 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
-# devise
-gem 'devise'
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -52,12 +58,12 @@ gem 'bootsnap', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '>= 5.0', '< 6.0'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem 'database_cleaner'
-  gem 'letter_opener'
   gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -70,7 +76,6 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
-  gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end

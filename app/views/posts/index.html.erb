@@ -1,53 +1,10 @@
-<div class="each-user-div">
-<img src="<%= @user.photo %> " alt = "<%= @user.name %>"  />
-
-<div>
-<p>UserName :<%=   @user.name %></p>
-<p> Number of Posts :<%=  @user.postscounter %></p>
-
-</div>
-</div>
-<% @posts.each_with_index do |f, index| %>
-    <div class="each-of-last-3-posts">
-    <p> Post <%= index +1 %>  </p>
-    
-    <p>   title: <%= f.title %></p>
-    <p>   text: <%= f.text %></p>
-
-    <div class="likes-and-comments-div">
-    <p>   Comments: <%= f.commentscounter %></p>
-    <p>   Likes: <%= f.likescounter %></p>
-   
-
-  
-  
-
-
-    </div>
-    <button>
-    <%= link_to "See Post ", user_post_path(@user, f) %>
-    </button>
-    </div>
-    <div class="each-post-comments">
-    <% f.last_five_comments.each do |f| %>
-        <p> Username: <%= f.user.name %> Comment : <%= f.text %> </p>
-       
-     
-       
-       
-    <% end %>
-    </div>
-  
-
-  
-
- 
-   
-   
-   <% end %>
-<div class="see-all-posts-button">
-   <button>Pagination</button>
-</div>
-<button>
-<%= link_to "add new post", new_user_post_path(@user) %>
-</button>
+<% if @posts.count > 0 %>
+  <%= render partial: "shared/user/user_header", locals: { user: @posts[0].author } %>
+  <% @posts.each do |post| %>
+    <%= render partial: "shared/post/post_summary", locals: { post: post } %>
+    <%= render partial: "shared/post/comment", locals: { post: post } %>
+  <% end %>
+  <button>Pagination</button>
+<% else %>
+  <p>This user has no posts yet</p>
+<% end %>

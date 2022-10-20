@@ -1,15 +1,30 @@
 require 'rails_helper'
+
 RSpec.describe User, type: :model do
-  it 'is not valid without a name' do
-    user = User.new(name: nil)
-    expect(user).to_not be_valid
+  subject { User.new(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Mexico.', posts_counter: 0) }
+
+  before { subject.save }
+
+  it 'should save the user' do
+    expect(subject).to be_valid
   end
-  it 'is not valid if posts counter is not a number ' do
-    user = User.new(name: 'John', postscounter: 'not a number')
-    expect(user).to_not be_valid
+
+  it 'name should be present' do
+    subject.name = nil
+    expect(subject).to_not be_valid
   end
-  it 'is not valid if posts counter is less than 0' do
-    user = User.new(name: 'John', postscounter: -1)
-    expect(user).to_not be_valid
+
+  it 'should have equal to or greater than 0 post counter' do
+    subject.posts_counter = nil
+    expect(subject).to_not be_valid
+  end
+
+  it 'should get the last 3 posts' do
+    Post.create(title: 'Hello', text: 'This is my first post', comments_counter: 0, likes_counter: 0, author: subject)
+    Post.create(title: 'Hello2', text: 'This is my second post', comments_counter: 0, likes_counter: 0, author: subject)
+    Post.create(title: 'Hello3', text: 'This is my third post', comments_counter: 0, likes_counter: 0, author: subject)
+    Post.create(title: 'Hello4', text: 'This is my fourth post', comments_counter: 0, likes_counter: 0, author: subject)
+    expect(subject.last_three_posts.length).to eq 3
+    expect(subject.last_three_posts[0].text).to eq 'This is my fourth post'
   end
 end

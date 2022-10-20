@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
   def index
-    @users = User.includes(:posts, :comments, :likes)
+    @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to @user
+    else
+      render :new
+    end
   end
 end
