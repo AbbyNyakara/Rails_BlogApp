@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'devise'
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '5c8af9f023f4ea572529fd46e2208b500b872fdb75ca8872c8ba7665ba784521e1c9480734cb54bf377a651182702e899abea40a0cb64521701be8b950db95b4'
+  # config.secret_key = 'c3cef5f036733cb1ca4a9f5392cd2bad70089a068745e8d80487df8ffc07a3ccfd0a85ea00a8d499c57b460820fe10b8b52ba6003df68b3b0b8464f7bd216e81'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'cccfb993565272e790892da4dc153d8e9767d347a5d310c024710fa2c8a8f90af643a82505e8555997f7dcffdbc2eca27edeb235840880bbafcd519fa4df6587'
+  # config.pepper = '7e4d101b2ddf9ba03050a18113182c04e7194c5a6fd2fc7be51bc3bc289aa7b889ca68e6206a577374b5ee77f6792b4908cb5a418b1f4e42a8207dd13b8fed72'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -228,7 +228,7 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # config._after_reset_password = true
+  # config.sign_in_after_reset_password = true
 
   # ==> Configuration for :encryptable
   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
@@ -307,5 +307,5 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
-  # config._after_change_password = true
+  # config.sign_in_after_change_password = true
 end
