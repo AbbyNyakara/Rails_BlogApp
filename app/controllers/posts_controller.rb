@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @posts = Post.includes(:author, :comments).where(author: params[:user_id])
   end
@@ -8,18 +10,19 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @user = current_user
+    @post = @user.posts.new
   end
 
   def create
-    @user = Current.user
-    @post = Post.create(post_params)
-    @post.author = @user
+    @user = current_user
+    @post = @user.posts.create(post_params)
     if @post.save
       flash[:notice] = 'New post created successfully.'
       redirect_to user_post_path(@user, @post)
     else
-      render :new, status: :unprocessable_entity
+      flash.now[:alert] = 'Post creation failed'
+      render action: 'new'
     end
   end
 

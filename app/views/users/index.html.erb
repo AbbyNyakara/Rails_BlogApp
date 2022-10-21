@@ -1,15 +1,7 @@
-<% if user_signed_in? %>
-<%= button_to 'Log out', destroy_user_session_path, method: :delete %>
 <% if @users.count > 0 %>
-
   <% @users.each do |user| %>
     <%= render partial: "shared/user/user_header", locals: { user: user } %>
   <% end %>
 <% else %>
   <p>No users found</p>
-<% end %>
-<% else %>
-<a href="/users/sign_in">Sign in/ Sign up</a>
-  <p>Please sign in</p>
-
 <% end %>

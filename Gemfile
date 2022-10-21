@@ -13,7 +13,7 @@ gem 'pg', '~> 1.1'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'cancancan'
 gem 'devise'
-gem 'jquery-rails'
+gem 'jwt', '~> 2.4'
 gem 'letter_opener'
 gem 'puma', '~> 5.0'
 gem 'sassc-rails'
@@ -32,8 +32,6 @@ gem 'stimulus-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
-
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
